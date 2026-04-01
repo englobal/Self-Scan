@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Self-Scan Mobile Cruz Verde</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="logo"><img alt="Cruz Verde Chile" src="data:image/png;base64,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" /></div>
+      <div class="pill">Prototype</div>
+    </div>
+
+    <section class="screen active" id="home">
+      <div class="hero">
+        <h1>Compra y paga desde tu celular</h1>
+        <p>Flujo ágil: escanea → agrega → carrito → cliente → pagar.</p>
+        <div class="grid-2">
+          <div class="mini-card"><span class="tiny">Modo</span><strong>Scan &amp; Go</strong></div>
+          <div class="mini-card"><span class="tiny">Pago</span><strong>QR / Wallets</strong></div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="card stack">
+          <div class="section-title"><h3>Local de compra</h3><span class="badge badge-info">4 dígitos</span></div>
+          <input id="storeCode" inputmode="numeric" maxlength="4" placeholder="Ej.: 1234" />
+          <div class="tiny muted">Ingresa el número del local antes de comenzar la venta. Solo números hasta largo 4.</div>
+        </div>
+        <div class="card stack">
+          <div class="section-title"><h3>Inicio rápido</h3><span class="badge badge-ok">Local</span></div>
+          <div class="banner">
+            <div class="icon">🏬</div>
+            <div>
+              <strong id="storeDisplayScan">Local no informado</strong>
+              <div class="tiny">Puedes cambiarlo en cualquier momento antes de pagar.</div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-full" id="goScanBtn" type="button">Ir a escanear</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="scan">
+      <div class="section-title"><h2>Escaneo</h2><button class="btn btn-secondary" data-go="cart" type="button">Carrito</button></div>
+      <div class="banner hidden" id="scanClubBanner" style="margin-bottom:14px">
+        <div class="icon">CL</div>
+        <div><strong id="clubCustomerNameScan">Cliente Club</strong><div class="tiny">Cliente es parte del Club Cruz Verde.</div></div>
+      </div>
+      <div class="banner banner-danger hidden" id="scanNonClubBanner" style="margin-bottom:14px">
+        <div class="icon icon-danger">!</div>
+        <div><strong id="nonClubCustomerNameScan">Cliente</strong><div class="tiny">Cliente no es parte del Club Cruz Verde.</div></div>
+      </div>
+      <div class="stack">
+        <div class="card scanner-control-card">
+          <div class="row-between">
+            <div>
+              <h3>Escaneo automático</h3>
+              <div class="tiny muted">Toca el botón scanner y el producto se detecta solo.</div>
+            </div>
+            <span class="badge badge-info" id="barcodeSupport">Escaneo automático disponible</span>
+          </div>
+          <div class="scanner">
+            <video autoplay muted playsinline id="video"></video>
+            <div class="scanner-overlay">
+              <div class="scan-box"><div class="scan-line"></div></div>
+            </div>
+            <div class="scanner-fallback" id="videoFallback">Toca el botón scanner para abrir la cámara. Luego el producto se detecta solo.</div>
+          </div>
+          <button class="scanner-trigger" id="cameraBtn" type="button">
+            <img alt="Scanner" src="data:image/png;base64,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" />
+            <span>
+              <strong>Tocar para escanear</strong>
+              <small>Abre cámara y busca el producto automáticamente</small>
+            </span>
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="section-title"><h3>Ingreso manual</h3><span class="badge badge-info">SKU / EAN</span></div>
+          <div class="row" style="align-items:stretch">
+            <input id="manualCode" placeholder="Escribe SKU o código de barras" />
+            <button class="btn btn-primary" id="manualSearchBtn" type="button">Buscar</button>
+          </div>
+          <div class="tiny muted" style="margin-top:10px">El artículo solo se mostrará cuando lo encuentres por cámara, SKU o código de barras.</div>
+        </div>
+
+        <div class="card">
+          <div class="section-title"><h3>Cliente</h3><button class="btn btn-secondary btn-small" data-go="customer" id="scanCustomerNavBtn" type="button">Ingresar cliente</button></div>
+          <p class="muted tiny">Ingresar cliente no corta el flujo: vuelves al carrito para pagar o seguir escaneando.</p>
+        </div>
+
+        <div class="card">
+          <div class="section-title"><h3>Estado de búsqueda</h3><span class="badge badge-info">Bajo demanda</span></div>
+          <div class="tiny muted" style="margin-bottom:10px">No se muestra catálogo completo. Solo aparece el producto encontrado.</div>
+          <div class="product-list" id="demoList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="product">
+      <div class="section-title"><h2>Producto</h2><button class="btn btn-secondary" data-go="scan" type="button">Volver</button></div>
+      <div class="card" style="display:grid;gap:14px">
+        <div class="hero-image" id="productHero"></div>
+        <div><h3 id="productName">Producto</h3><p class="muted" id="productDesc">Detalle</p></div>
+        <div class="kv">
+          <div class="item"><span>Precio lista</span><strong id="productListPrice">$0</strong></div>
+          <div class="item"><span>Precio oferta</span><strong id="productSalePrice">$0</strong></div>
+          <div class="item hidden" id="productClubRow"><span>Precio Club final</span><strong id="productClubPrice">$0</strong></div>
+          <div class="item"><span>Descuento</span><strong id="productDiscount">-</strong></div>
+          <div class="item"><span>Código</span><strong id="productCode">000</strong></div>
+          <div class="item"><span>Formato</span><strong id="productFormat">Unidad</strong></div>
+        </div>
+        <div class="badge badge-warn hidden" id="productPromo"></div>
+        <div class="row">
+          <button class="btn btn-secondary btn-full" data-go="scan" type="button">Cancelar</button>
+          <button class="btn btn-primary btn-full" id="addProductBtn" type="button">Agregar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="cart">
+      <div class="section-title"><h2>Orden digital</h2><button class="btn btn-secondary" data-go="scan" type="button">Escanear</button></div>
+      <div class="card" style="padding:12px;margin-bottom:14px">
+        <div class="row-between">
+          <div>
+            <h3 style="margin:0">Cliente</h3>
+            <div class="tiny muted" id="cartCustomerHint">No ingresado</div>
+            <div class="tiny muted" id="cartStoreHint">No informado</div>
+          </div>
+          <button class="btn btn-secondary btn-small" data-go="customer" id="cartCustomerNavBtn" type="button">Ingresar cliente</button>
+        </div>
+      </div>
+      <div class="banner hidden" id="cartClubBanner" style="margin-bottom:14px">
+        <div class="icon">CL</div>
+        <div><strong id="clubCustomerNameCart">Cliente Club</strong><div class="tiny">Cliente es parte del Club Cruz Verde.</div></div>
+      </div>
+      <div class="banner banner-danger hidden" id="cartNonClubBanner" style="margin-bottom:14px">
+        <div class="icon icon-danger">!</div>
+        <div><strong id="nonClubCustomerNameCart">Cliente</strong><div class="tiny">Cliente no es parte del Club Cruz Verde.</div></div>
+      </div>
+      <div class="card" style="margin-bottom:14px">
+        <div class="section-title"><h3>Beneficios</h3><span class="badge badge-info">Resumen</span></div>
+        <div class="tiny muted" id="cartDermoHint">Sin beneficios adicionales pendientes</div>
+      </div>
+      <div class="card">
+        <div id="cartList"></div>
+        <div class="kv">
+          <div class="item"><span>Subtotal lista</span><strong id="subtotal">$0</strong></div>
+          <div class="item"><span>Descuento oferta</span><strong id="saleDiscount">$0</strong></div>
+          <div class="item"><span>Descuento Club 7%</span><strong id="clubDiscount">$0</strong></div>
+          <div class="item hidden" id="dermoRow"><span>Dcto. Prog. Dermo</span><strong id="dermoDiscount">$0</strong></div>
+          <div class="item"><span>Ahorro total</span><strong id="discount">$0</strong></div>
+          <div class="item"><span>Total final</span><strong id="total">$0</strong></div>
+        </div>
+      </div>
+      <div class="stack">
+        <button class="btn btn-secondary btn-full" data-go="scan" type="button">Seguir escaneando</button>
+        <button class="btn btn-primary btn-full" id="goPaymentBtn" type="button">Pagar</button>
+      </div>
+    </section>
+
+    <section class="screen" id="customer">
+      <div class="section-title"><h2>Identificación cliente</h2><button class="btn btn-secondary" data-go="cart" type="button">Volver</button></div>
+      <div class="banner hidden" id="clubBanner" style="margin-bottom:14px">
+        <div class="icon">CL</div>
+        <div><strong id="clubCustomerName">Cliente Club</strong><div class="tiny">Cliente es parte del Club Cruz Verde.</div></div>
+      </div>
+      <div class="banner banner-danger hidden" id="nonClubBanner" style="margin-bottom:14px">
+        <div class="icon icon-danger">!</div>
+        <div><strong id="nonClubCustomerName">Cliente</strong><div class="tiny">Cliente no es parte del Club Cruz Verde.</div></div>
+      </div>
+      <div class="card stack">
+        <div><h3>RUT</h3><p class="muted tiny">Ejemplo: <b>8.123.311-K</b> (se formatea automáticamente).</p></div>
+        <input id="customerDoc" inputmode="text" placeholder="Ej.: 8.123.311-K" />
+        <button class="btn btn-primary btn-full" id="lookupCustomerBtn" type="button">Aplicar cliente</button>
+        <button class="btn btn-secondary btn-full hidden" id="clearCustomerBtn" type="button">Limpiar cliente</button>
+      </div>
+    </section>
+
+    <section class="screen" id="payment">
+      <div class="section-title"><h2>Confirmar pago</h2><button class="btn btn-secondary" data-go="cart" type="button">Volver</button></div>
+      <div class="card stack">
+        <div class="row-between"><h3>Total a pagar</h3><strong id="paymentTotal">$0</strong></div>
+        <div class="banner">
+          <div class="icon">🏬</div>
+          <div>
+            <strong id="paymentStoreText">Local no informado</strong>
+            <div class="tiny" id="paymentCustomerText">Invitado</div>
+          </div>
+        </div>
+        <div class="tiny muted" id="paymentDermoHint">Sin canjes especiales</div>
+        <div class="kv compact-kv">
+          <div class="item"><span>Subtotal lista</span><strong id="paymentSubtotal">$0</strong></div>
+          <div class="item"><span>Descuento oferta</span><strong id="paymentOfferDiscount">$0</strong></div>
+          <div class="item"><span>Descuento Club 7%</span><strong id="paymentClubDiscount">$0</strong></div>
+          <div class="item hidden" id="paymentDermoRow"><span>Dcto. Prog. Dermo</span><strong id="paymentDermoDiscount">$0</strong></div>
+        </div>
+        <div class="pay-option active" data-method="qr"><span>QR hacia POS</span><strong>Demo video</strong></div>
+        <div class="pay-option" data-method="webpay"><span>Webpay (Transbank)</span><strong>Tarjetas</strong></div>
+        <div class="pay-option" data-method="gpay"><span>Google Pay</span><strong>Android</strong></div>
+        <div class="pay-option" data-method="mp"><span>Mercado Pago</span><strong>Wallet</strong></div>
+        <button class="btn btn-primary btn-full" id="continuePaymentBtn" type="button">Continuar</button>
+      </div>
+    </section>
+
+    <section class="screen" id="qrpay">
+      <div class="section-title"><h2>Pagar en POS</h2><button class="btn btn-secondary" data-go="payment" type="button">Volver</button></div>
+      <div class="card stack" style="text-align:center">
+        <p class="muted">Acérquese a un POS y escanee el código QR para efectuar el pago.</p>
+        <div class="qr"></div>
+        <div class="badge badge-info" style="margin:0 auto">Orden #<span id="orderRef">0001</span></div>
+        <button class="btn btn-primary btn-full" id="approveQrBtn" type="button">Simular pago aprobado</button>
+      </div>
+    </section>
+
+    <section class="screen" id="walletpay">
+      <div class="section-title"><h2>Pago digital</h2><button class="btn btn-secondary" data-go="payment" type="button">Volver</button></div>
+      <div class="card stack">
+        <div class="row-between">
+          <div><h3 id="walletTitle">Webpay (Transbank)</h3><p class="muted tiny" id="walletDesc">Selecciona el tipo de pago para simular.</p></div>
+          <div class="badge badge-info" id="walletMethodBadge">webpay</div>
+        </div>
+        <div class="pay-suboptions hidden" id="webpaySuboptions">
+          <div class="subopt active" data-sub="redcompra"><div><strong>Redcompra</strong><div class="tiny muted">Débito</div></div><span class="brand-chip">TBK</span></div>
+          <div class="subopt" data-sub="visa"><div><strong>Crédito Visa</strong><div class="tiny muted">3DS/Autorización</div></div><span class="brand-chip">VISA</span></div>
+          <div class="subopt" data-sub="master"><div><strong>Crédito MasterCard</strong><div class="tiny muted">3DS/Autorización</div></div><span class="brand-chip">MC</span></div>
+        </div>
+        <div class="processing hidden" id="processingBox">
+          <div class="spinner" aria-label="Procesando"></div>
+          <div style="text-align:center">
+            <strong id="processingTitle">Procesando pago…</strong>
+            <div class="tiny muted" id="processingSubtitle">Conectando con el proveedor</div>
+          </div>
+          <div class="progress"><div></div></div>
+        </div>
+        <div class="row">
+          <button class="btn btn-secondary btn-full" id="failPayBtn" type="button">Simular rechazo</button>
+          <button class="btn btn-primary btn-full" id="approveWalletBtn" type="button">Autorizar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="success">
+      <div class="success-page">
+        <div class="success-top-card">
+          <img alt="Cruz Verde" src="data:image/png;base64,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" />
+          <div class="success-order-box">Pedido: <strong id="successOrder">C00000000</strong></div>
+        </div>
+        <div class="success-hero">
+          <div class="success-icon">🧾</div>
+          <div>
+            <div class="success-hi">Hola <span id="successGreetingName">CLIENTE</span></div>
+            <h2>¡La boleta de tu compra está lista!</h2>
+            <p id="successStoreText">Gracias por comprar en Local 0000</p>
+          </div>
+        </div>
+        <div class="success-detail-card">
+          <div>
+            <h3>Datos de boleta</h3>
+            <div class="success-metric"><span>N° Folio:</span><strong id="successFolio">0000000000</strong></div>
+            <div class="success-metric"><span>Fecha de emisión:</span><strong id="successDate">00/00/0000</strong></div>
+            <div class="success-metric"><span>Monto total:</span><strong id="successTotal">$0</strong></div>
+            <div class="success-metric"><span>Cliente:</span><strong id="successCustomer">Invitado</strong></div>
+          </div>
+          <div class="success-receipt-icon">📜</div>
+        </div>
+        <div class="stack">
+          <button class="btn btn-primary btn-full" id="viewReceiptBtn" type="button">Ver Boleta</button>
+          <button class="btn btn-secondary btn-full" id="newOrderBtn" type="button">Nueva compra</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="receipt">
+      <div class="section-title no-print"><h2>Boleta visual</h2><button class="btn btn-secondary" id="receiptBackBtn" type="button">Volver</button></div>
+      <div class="card no-print" style="margin-bottom:14px">
+        <div class="row-between">
+          <div>
+            <h3>Cliente</h3>
+            <div class="tiny muted" id="receiptCustomerName">Invitado</div>
+          </div>
+          <button class="btn btn-primary btn-small" id="receiptPrintBtn" type="button">Imprimir / PDF</button>
+        </div>
+      </div>
+      <div class="receipt-paper" id="receiptPaper"></div>
+    </section>
+
+    <section class="screen hidden" id="catalog">
+      <div class="section-title"><h2>Administrar catálogo</h2><button class="btn btn-secondary" data-go="home" type="button">Inicio</button></div>
+      <div class="card stack">
+        <div class="section-title"><h3>Productos cargados</h3><span class="badge badge-info" id="catCount">0</span></div>
+        <div class="product-list" id="catalogList"></div>
+      </div>
+    </section>
+
+    <div class="footer-space"></div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="dermoModal">
+    <div class="modal-card">
+      <h3>Canje disponible</h3>
+      <p>Tiene saldo disponible para canje del programa DermoCosmética. ¿Desea canjear?</p>
+      <div class="row">
+        <button class="btn btn-secondary btn-full" id="dermoNoBtn" type="button">No</button>
+        <button class="btn btn-primary btn-full" id="dermoYesBtn" type="button">Sí</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
