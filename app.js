@@ -50,6 +50,108 @@ const MOCK_VENDOR = { code:'11945', name:'JESSICA FRIAS INOSTROZA', box:'4' };
 const $ = (id) => document.getElementById(id);
 const money = (n) => new Intl.NumberFormat('es-CL', { style:'currency', currency:'CLP', maximumFractionDigits:0 }).format(Number(n || 0));
 
+const backendSale = {
+  contextId: null,
+  context: null,
+  paymentMethod: 402,
+  receiptNumber: null,
+};
+
+function saveBackendState() {
+  try {
+    localStorage.setItem('selfscan_backend_sale', JSON.stringify(backendSale));
+  } catch (_) {}
+}
+
+function loadBackendState() {
+  try {
+    const raw = localStorage.getItem('selfscan_backend_sale');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (data && typeof data === 'object') {
+      backendSale.contextId = data.contextId || null;
+      backendSale.context = data.context || null;
+      backendSale.paymentMethod = data.paymentMethod || 402;
+      backendSale.receiptNumber = data.receiptNumber || null;
+    }
+  } catch (_) {}
+}
+
+async function ensureBackendContext() {
+  if (backendSale.contextId) return backendSale.contextId;
+
+  const result = await window.SaleApi.createContext();
+  backendSale.contextId = result.contextId;
+  saveBackendState();
+  return backendSale.contextId;
+}
+
+async function refreshBackendContext() {
+  if (!backendSale.contextId) return null;
+  const result = await window.SaleApi.getContext(backendSale.contextId);
+  backendSale.context = result.context;
+  saveBackendState();
+  return backendSale.context;
+}
+
+function mapBackendContextToCart() {
+  const ctx = backendSale.context;
+  if (!ctx || !ctx.items) return [];
+
+  return Object.values(ctx.items).map((entry) => {
+    const p = entry.product || {};
+    return {
+      code: p.id,
+      barcode: Array.isArray(p.barcode) ? p.barcode[0] || p.id : p.id,
+      name: p.name || 'Producto',
+      desc: p.description || '',
+      listPrice: Number(p.price || 0),
+      salePrice: Number(
+        entry.total?.value && entry.quantity
+          ? Math.round(entry.total.value / entry.quantity)
+          : p.evaluatedPrice?.value || p.price || 0,
+      ),
+      qty: Number(entry.quantity || 1),
+      format: p.measureUnit || 'Unidad',
+      imageDataUrl: null,
+      promoLabel:
+        Array.isArray(entry.promotions) && entry.promotions.length
+          ? entry.promotions.map((x) => x.description).join(' · ')
+          : '',
+      discountLabel:
+        Array.isArray(entry.promotions) && entry.promotions.length
+          ? `-${money(
+              entry.promotions.reduce(
+                (acc, x) => acc + Number(x.discount?.value || 0),
+                0,
+              ),
+            )}`
+          : '-',
+      promotions: entry.promotions || [],
+      backendEntry: entry,
+    };
+  });
+}
+
+function syncCartFromBackend() {
+  cart = mapBackendContextToCart();
+  renderCart();
+}
+
+function getPendingFromBackend() {
+  return Number(backendSale.context?.pending?.value || 0);
+}
+
+async function withUiLock(fn, loadingMessage = 'Procesando...') {
+  try {
+    document.body.classList.add('busy');
+    toast(loadingMessage, 1200);
+    return await fn();
+  } finally {
+    document.body.classList.remove('busy');
+  }
+}
+
 function toast(msg, ms = 2300) {
   const t = $('toast');
   if (!t) return;
