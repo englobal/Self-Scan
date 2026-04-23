@@ -487,35 +487,65 @@ function scanByCode() {
   if (ok) toast(`Producto encontrado: ${currentProduct?.name || value}`);
 }
 
-function addCurrentProduct() {
+async function addCurrentProduct() {
   if (!currentProduct) return toast('Primero selecciona un producto');
-  const existing = cart.find((item) => item.code === currentProduct.code);
-  if (existing) {
-    existing.qty = Number(existing.qty || 1) + 1;
-  } else {
-    cart.push({ ...currentProduct, qty: 1 });
+
+  try {
+    await withUiLock(async () => {
+      const contextId = await ensureBackendContext();
+
+      await window.SaleApi.addItem({
+        contextId,
+        articleId: String(currentProduct.code),
+        quantity: 1,
+      });
+
+      await refreshBackendContext();
+      syncCartFromBackend();
+    }, 'Agregando producto...');
+
+    const name = currentProduct.name;
+    clearLookupState();
+    toast(`Agregado: ${name}`);
+    go('cart');
+  } catch (error) {
+    console.error(error);
+    toast(`No se pudo agregar el producto: ${error.message}`, 3000);
   }
-  resetConditionalDiscounts();
-  renderCart();
-  const name = currentProduct.name;
-  clearLookupState();
-  toast(`Agregado: ${name}`);
-  go('cart');
 }
 
-function changeQty(code, delta) {
+async function changeQty(code, delta) {
+  if (Number(delta) <= 0) {
+    toast('Por ahora solo sumaremos unidades desde el backend');
+    return;
+  }
+
   const item = cart.find((x) => x.code === code);
   if (!item) return;
-  item.qty = Math.max(1, Number(item.qty || 1) + Number(delta || 0));
-  resetConditionalDiscounts();
-  renderCart();
+
+  try {
+    await withUiLock(async () => {
+      const contextId = await ensureBackendContext();
+
+      await window.SaleApi.addItem({
+        contextId,
+        articleId: String(code),
+        quantity: 1,
+      });
+
+      await refreshBackendContext();
+      syncCartFromBackend();
+    }, 'Actualizando cantidad...');
+
+    toast('Cantidad actualizada');
+  } catch (error) {
+    console.error(error);
+    toast(`No se pudo actualizar la cantidad: ${error.message}`, 3000);
+  }
 }
 
 function removeItem(code) {
-  cart = cart.filter((x) => x.code !== code);
-  resetConditionalDiscounts();
-  renderCart();
-  toast('Producto eliminado');
+  toast('Quitar ítems lo conectaremos en el siguiente paso');
 }
 
 function renderCart() {
@@ -568,29 +598,49 @@ function renderCart() {
   }
 }
 
-function lookupCustomer() {
-  const input = $('customerDoc');
-  if (!input) return;
-  const clean = rutClean(input.value);
-  if (clean.length < 2) return toast('Ingresa un RUT válido');
+async function connectCustomerByRut(rutRaw) {
+  const rut = String(rutRaw || '')
+    .replace(/\./g, '')
+    .replace(/-/g, '')
+    .trim()
+    .toUpperCase();
 
-  const formatted = rutFormat(clean);
-  input.value = formatted;
-
-  const found = findClubCustomerByRut(clean);
-  if (found) {
-    customer = { doc: found.doc || formatted, name: found.name || formatted, isClub: true, lookedUp: true };
-    toast(`Cliente Club aplicado: ${customer.name}`);
-  } else {
-    customer = { doc: formatted, name: formatted, isClub: false, lookedUp: true };
-    toast('Cliente no pertenece al Club');
+  if (!rut) {
+    toast('Ingresa un RUT');
+    return;
   }
 
-  resetConditionalDiscounts();
-  syncCustomerUi();
-  renderCart();
-  if (currentProduct) openProduct(currentProduct);
-  go('cart');
+  try {
+    await withUiLock(async () => {
+      const contextId = await ensureBackendContext();
+
+      await window.SaleApi.setCustomer({
+        contextId,
+        rut,
+      });
+
+      await refreshBackendContext();
+      syncCartFromBackend();
+    }, 'Asociando cliente...');
+
+    const normalized = CLUB_CUSTOMER_KEYS[rut];
+    if (normalized) {
+      customer.name = normalized.name;
+      customer.doc = normalized.doc;
+      customer.isClub = !!normalized.isClub;
+    } else {
+      customer.name = `Cliente ${rut}`;
+      customer.doc = rut;
+      customer.isClub = false;
+    }
+
+    syncCustomerUi();
+    toast('Cliente asociado');
+    go('cart');
+  } catch (error) {
+    console.error(error);
+    toast(`No se pudo asociar el cliente: ${error.message}`, 3000);
+  }
 }
 
 function clearCustomer() {
@@ -1240,6 +1290,7 @@ function bindEvents() {
 }
 
 function init() {
+  loadBackendState();
   bindEvents();
   updateBarcodeSupportBadge(false);
   renderSearchStatus();
